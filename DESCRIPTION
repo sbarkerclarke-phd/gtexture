@@ -1,0 +1,31 @@
+Package: CoOccurR
+Title: Generalized Application of Co-Occurrence Matrices
+Version: 0.0.1
+Authors@R: c(
+    person("Steph", "Barker-Clarke",
+           email = "OwenS2@ccf.org", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-1961-7919")),
+    person("Raoul", "Wadhwa",
+           email = "raoulwadhwa@gmail.com", role = "aut",
+           comment = c(ORCID = "0000-0003-0503-9580")),
+    person("Jacob", "Scott",
+           role = "aut",
+           comment = c(ORCID = "0000-0003-2971-7673")))
+Description: Generalizes application of gray-level co-occurrence matrix (GLCM)
+    metrics to objects outside of images. The current focus is to apply GLCM
+    metrics to the study of fitness landscapes in evolutionary biology,
+    particularly the evolution of cancer resistance. A general reference to
+    learn more about mathematical oncology can be found in Rockne et al. (2019)
+    <doi:10.1088/1478-3975/ab1a09>.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Imports: 
+    fitscape (>= 0.1),
+    magrittr (>= 2.0)
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+URL: https://github.com/sbarkerclarke-phd/CoOccurR
+BugReports: https://github.com/sbarkerclarke-phd/CoOccurR/issues
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
