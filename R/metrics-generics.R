@@ -1,6 +1,7 @@
 #####HOMOGENEITY#####
 # S3 generic for GLCM homogeneity metric
 # current goal to implement only for FitLandDF class; default throws error
+#'
 homogeneity <- function(x, ...) {
   UseMethod("homogeneity")
 }
