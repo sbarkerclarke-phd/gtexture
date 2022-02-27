@@ -2,12 +2,25 @@
 % Please edit documentation in R/utility.R
 \name{discretize}
 \alias{discretize}
+\alias{discretize.numeric}
+\alias{discretize.integer}
+\alias{discretize.FitLandDF}
 \title{Discretize Numeric Variable Into Categories}
 \usage{
 discretize(x, ...)
+
+\method{discretize}{numeric}(x, nlevels, ...)
+
+\method{discretize}{integer}(x, nlevels, ...)
+
+\method{discretize}{FitLandDF}(x, nlevels, ...)
 }
 \arguments{
 \item{x}{either a vector (\code{numeric} or \code{integer}) or \code{FitLandDF} object}
+
+\item{...}{potential additional arguments, currently unnecessary}
+
+\item{nlevels}{positive integer indicating number of discrete categories}
 }
 \value{
 discretized form of \code{x}
@@ -15,9 +28,7 @@ discretized form of \code{x}
 \description{
 Takes a numeric variable (could be of class \code{numeric} or \code{integer}) and
 returns a discretized version, in which each element has been replaced by a
-single integer between \code{1} and \code{nlevels}, inclusive. The \code{nlevels} parameter
-is not included in the function definition, but is required and must be a
-positive integer value.
+single integer between \code{1} and \code{nlevels}, inclusive.
 }
 \examples{
 

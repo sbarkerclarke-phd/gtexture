@@ -4,12 +4,14 @@
 #'
 #' Takes a numeric variable (could be of class `numeric` or `integer`) and
 #' returns a discretized version, in which each element has been replaced by a
-#' single integer between `1` and `nlevels`, inclusive. The `nlevels` parameter
-#' is not included in the function definition, but is required and must be a
-#' positive integer value.
+#' single integer between `1` and `nlevels`, inclusive.
 #'
+#' @name discretize
 #' @param x either a vector (`numeric` or `integer`) or `FitLandDF` object
+#' @param nlevels positive integer indicating number of discrete categories
+#' @param ... potential additional arguments, currently unnecessary
 #' @return discretized form of `x`
+#' @import fitscape
 #' @export
 #' @examples
 #'
@@ -34,6 +36,8 @@ discretize.default <- function(x, nlevels, ...) {
 }
 
 # discretize numeric vectors
+#' @rdname discretize
+#' @export
 discretize.numeric <- function(x, nlevels, ...) {
   # check parameter validity
   stopifnot(valid_pos_int(nlevels))
@@ -46,11 +50,15 @@ discretize.numeric <- function(x, nlevels, ...) {
 }
 
 # discretize integer vectors
+#' @rdname discretize
+#' @export
 discretize.integer <- function(x, nlevels, ...) {
   discretize.numeric(x, nlevels, ...)
 }
 
 # discretize fitness landscape
+#' @rdname discretize
+#' @export
 discretize.FitLandDF <- function(x, nlevels, ...) {
   x$Value <- discretize.numeric(x$Value, nlevels, ...)
 
