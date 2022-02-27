@@ -19,7 +19,9 @@ Description: Generalizes application of gray-level co-occurrence matrix (GLCM)
     <doi:10.1088/1478-3975/ab1a09>.
 License: MIT + file LICENSE
 Encoding: UTF-8
-Imports: fitscape
+Imports: 
+    fitscape (>= 0.1),
+    magrittr (>= 2.0)
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 URL: https://github.com/sbarkerclarke-phd/CoOccurR
