@@ -1,4 +1,9 @@
+# R/Rstudio files
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+
+# intermediary files
+*.html
+
