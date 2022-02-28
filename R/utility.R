@@ -59,6 +59,8 @@ discretize.integer <- function(x, nlevels, ...) {
 # discretize fitness landscape
 #' @rdname discretize
 #' @export
+# if nlevels is a vector with more than 1 element, then use the rounding method
+#   to select levels
 discretize.FitLandDF <- function(x, nlevels, ...) {
   x$Value <- discretize.numeric(x$Value, nlevels, ...)
 
