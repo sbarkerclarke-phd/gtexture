@@ -11,6 +11,11 @@ homogeneity.default <- function(x, ...) {
   stop("default behavior has not been defined for homogeneity")
 }
 
+# the actual workhorse for homogeneity (others will eventually call this)
+homogeneity.matrix <- function(x, ...) {
+
+}
+
 #####CONTRAST#####
 # S3 generic for GLCM contrast metric
 # current goal to implement only for FitLandDF class; default throws error
