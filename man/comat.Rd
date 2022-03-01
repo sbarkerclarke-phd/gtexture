@@ -19,6 +19,8 @@ get_comatrix(x, ...)
 \arguments{
 \item{x}{object upon which co-occurrence matrix will be calculated}
 
+\item{...}{additional arguments}
+
 \item{discrete}{function that discretizes object}
 
 \item{neighbor}{function that returns TRUE if two numeric vectors are within

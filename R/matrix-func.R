@@ -12,6 +12,7 @@
 #'   acceptable distance of one another or a single-element `character` vector
 #'   that describes how to identify acceptable neighbors/offsets
 #' @param normalize function that normalizes the co-occurrence matrix
+#' @param ... additional arguments
 #' @return co-occurrence matrix
 #' @export
 #' @examples

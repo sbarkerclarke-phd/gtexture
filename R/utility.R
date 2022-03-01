@@ -111,7 +111,7 @@ count_element_occur <- function(fitland, from_val, to_val,
 
   # get list of elements in fitscape equal to from_val
   from_coord <- fitland %>%
-    dplyr::filter(Value == from_val)
+    dplyr::filter(.data$Value == from_val)
 
   # go through each from_coord and filter list of to_coord,
   #   then count co-occurrences
@@ -119,7 +119,7 @@ count_element_occur <- function(fitland, from_val, to_val,
     curr_from <- from_coord[i, seq_len(ndim)] %>% as.integer
 
     curr_to <- fitscape::extract_df(fitland) %>%
-      dplyr::filter(Value == to_val) %>%
+      dplyr::filter(.data$Value == to_val) %>%
       dplyr::mutate(near = FALSE)
     for (j in seq_len(nrow(curr_to))) {
       curr_to_vec <- curr_to[j, seq_len(ndim)] %>% as.integer
