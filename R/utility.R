@@ -81,7 +81,7 @@ manhattan <- function(dist = 1) {
 #####CO-OCCURRENCE COUNTS#####
 #' @import dplyr
 count_element_occur <- function(fitland, from_val, to_val,
-                                neighbor = manhattan(1)) {
+                                neighbor) { # function to determine neighbors
   # counter
   counter <- 0
   ndim <- length(fitscape::dims(fitland))

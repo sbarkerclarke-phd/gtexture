@@ -15,10 +15,12 @@ get_comatrix.default <- function(x, ...) {
 # 4. normalize and return
 get_comatrix.FitLandDF <- function(x,
                                    nlevels,
-                                   neighbor = "manhattan",    # doesn't do anything
-                                   normalize = "sum1", ...) { # doesn't do anything
-  # discretize FL (`x`) to `nlevels` levels
-  x <- discretize(x, nlevels = nlevels)
+                                   discrete = discretize,                    # currently a function from factory
+                                   neighbor = manhattan(1),                  # currently a function from factory
+                                   normalize = function(mat) mat / sum(mat), # currently a function
+                                   ...) { # doesn't do anything
+  # discretize FL (`x`) to `nlevels` levels, equal to integers 1:nlevels
+  x <- discrete(x, nlevels = nlevels)
 
   # initialize co-occurrence matrix with all -1 (zero if actually processed)
   comat <- matrix(-1, nrow = nlevels, ncol = nlevels)
@@ -26,7 +28,7 @@ get_comatrix.FitLandDF <- function(x,
   # count co-occurrences
   for (i in seq_len(nrow(comat))) {
     for (j in seq_len(ncol(comat))) {
-      comat[i, j] <- count_element_occur(x, i, j)
+      comat[i, j] <- count_element_occur(x, i, j, neighbor = neighbor)
     }
   }
 
@@ -34,7 +36,7 @@ get_comatrix.FitLandDF <- function(x,
   comat <- comat + t(comat)
 
   # normalize
-  comat <- comat / sum(comat)
+  comat <- normalize(comat)
 
   # return co-occurrence matrix
   return(comat)
