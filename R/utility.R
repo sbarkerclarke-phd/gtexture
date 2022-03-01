@@ -99,23 +99,6 @@ equal_discrete <- function(nlevels) {
   }
 }
 
-#####MANHATTAN DISTANCE#####
-# calculate manhattan distance between 2 vectors (of equal length)
-#manhattan_dist <- function(x, y) {
-#  stopifnot(length(x) == length(y))
-
-#  return(sum(abs(x - y)))
-#}
-
-# manhattan distance function factory (checks manhattan distance < x)
-manhattan <- function(dist = 1) {
-  function(x, y) {
-    stopifnot(length(x) == length(y))
-
-    sum(abs(x - y)) <= dist
-  }
-}
-
 #####CO-OCCURRENCE COUNTS#####
 #' @import dplyr
 count_element_occur <- function(fitland, from_val, to_val,
