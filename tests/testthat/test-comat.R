@@ -1,4 +1,4 @@
-test_that("co-occurrence matrix generation (manhattan distance)", {
+test_that("co-occurrence matrix generation (distance functions)", {
   # create test fitness landscape
   set.seed(42)
   a <- stats::runif(9, -1) %>% round
@@ -8,6 +8,7 @@ test_that("co-occurrence matrix generation (manhattan distance)", {
 
   # print co-occurrence matrix
   cm <- get_comatrix(fl, nlevels = 3)
+  cm_euclid <- get_comatrix(fl, nlevels = 3, neighbor = euclidean(1))
 
   #print(cm)
 
@@ -22,4 +23,7 @@ test_that("co-occurrence matrix generation (manhattan distance)", {
   expect_equal(cm, t(cm))
   expect_equal(sum(cm), 1)
   expect_equal(cm, ans_cm)
+
+  # manhattan dist of 1 and euclid dist of 1 should have identical behavior
+  expect_equal(cm, cm_euclid)
 })
