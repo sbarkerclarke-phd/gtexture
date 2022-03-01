@@ -43,9 +43,9 @@ discretize.numeric <- function(x, nlevels, ...) {
   stopifnot(valid_pos_int(nlevels))
 
   # split into levels and return discrete value
-  break_vals <- seq(from = 0, to = nlevels, by = 1) / nlevels * max(x)
+  #break_vals <- seq(from = 0, to = nlevels, by = 1) / nlevels * max(x)
   x %>%
-    cut(breaks = break_vals) %>%
+    cut(breaks = nlevels) %>%
     as.integer
 }
 
@@ -63,4 +63,57 @@ discretize.FitLandDF <- function(x, nlevels, ...) {
   x$Value <- discretize.numeric(x$Value, nlevels, ...)
 
   return(x)
+}
+
+#####HAMMING DISTANCE#####
+# calculate manhattan distance between 2 vectors (of equal length)
+manhattan_dist <- function(x, y) {
+  stopifnot(length(x) == length(y))
+
+  return(sum(abs(x - y)))
+}
+
+# manhattan distance function factory (checks manhattan distance < x)
+manhattan <- function(dist = 1) {
+  return(function(x, y) {return(manhattan_dist(x, y) <= dist)})
+}
+
+#####CO-OCCURRENCE COUNTS#####
+#' @import dplyr
+count_element_occur <- function(fitland, from_val, to_val,
+                                neighbor = manhattan(1)) {
+  # counter
+  counter <- 0
+  ndim <- length(fitscape::dims(fitland))
+
+  # get list of elements in fitscape equal to from_val
+  from_coord <- fitland %>%
+    dplyr::filter(Value == from_val)
+
+  # go through each from_coord and filter list of to_coord,
+  #   then count co-occurrences
+  for (i in seq_len(nrow(from_coord))) {
+    curr_from <- from_coord[i, seq_len(ndim)] %>% as.integer
+
+    curr_to <- fitscape::extract_df(fitland) %>%
+      dplyr::filter(Value == to_val) %>%
+      dplyr::mutate(near = FALSE)
+    for (j in seq_len(nrow(curr_to))) {
+      curr_to_vec <- curr_to[j, seq_len(ndim)] %>% as.integer
+
+      # ignore if looking at own spot
+      if (all(curr_from == curr_to_vec)) next
+
+      if (neighbor(curr_from, curr_to_vec)) {
+        curr_to$near[j] <- TRUE
+      }
+    }
+    curr_to <- dplyr::filter(curr_to, near)
+    if (nrow(curr_to) > 0) counter <- counter + 1
+
+    #print(curr_from)
+    #print(curr_to)
+    #print("\n")
+  }
+  return(counter)
 }
