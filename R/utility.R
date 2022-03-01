@@ -9,6 +9,8 @@
 #' @name discretize
 #' @param x either a vector (`numeric` or `integer`) or `FitLandDF` object
 #' @param nlevels positive integer indicating number of discrete categories
+#' @param method method by which to discretize; split into equal sections by
+#'   default (`"equal"` value for parameter)
 #' @param ... potential additional arguments, currently unnecessary
 #' @return discretized form of `x`
 #' @import fitscape
