@@ -7,8 +7,11 @@ test_that("co-occurrence matrix generation (distance functions)", {
   fl <- fitscape::FitLandDF(a)
 
   # print co-occurrence matrix
-  cm <- get_comatrix(fl, nlevels = 3)
-  cm_euclid <- get_comatrix(fl, nlevels = 3, neighbor = euclidean(1))
+  cm <- get_comatrix(fl,
+                     discrete = equal_discrete(3))
+  cm_euclid <- get_comatrix(fl,
+                            discrete = equal_discrete(3),
+                            neighbor = euclidean(1))
 
   #print(cm)
 
