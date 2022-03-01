@@ -9,7 +9,7 @@ test_that("discretization works", {
   ## HARDCODED for num_dim := 2 and num_val := 3
   ans1 <- c(rep(1, 3), rep(2, 3), rep(3, 3))
   ans2 <- 1:9
-  ans3 <- c(rep(1, 4), rep(2, 5))
+  ans3 <- c(rep(1, 5), rep(2, 4))
   ##
 
   # test various discretizations of integer
