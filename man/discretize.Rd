@@ -9,7 +9,7 @@
 \usage{
 discretize(x, ...)
 
-\method{discretize}{numeric}(x, nlevels, ...)
+\method{discretize}{numeric}(x, nlevels, method = "equal", ...)
 
 \method{discretize}{integer}(x, nlevels, ...)
 
@@ -21,6 +21,9 @@ discretize(x, ...)
 \item{...}{potential additional arguments, currently unnecessary}
 
 \item{nlevels}{positive integer indicating number of discrete categories}
+
+\item{method}{method by which to discretize; split into equal sections by
+default (\code{"equal"} value for parameter)}
 }
 \value{
 discretized form of \code{x}
