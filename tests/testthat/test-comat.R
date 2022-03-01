@@ -7,7 +7,8 @@ test_that("co-occurrence matrix generation (manhattan distance)", {
   fl <- fitscape::FitLandDF(a)
 
   # print co-occurrence matrix
-  cm <- get_comatrix(fl, 3)
+  cm <- get_comatrix(fl, nlevels = 3)
+
   #print(cm)
 
   # manually calculated cm for 3x3: 1 1 0 1 0 0 0 -1 0

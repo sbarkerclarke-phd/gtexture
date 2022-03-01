@@ -38,15 +38,20 @@ discretize.default <- function(x, nlevels, ...) {
 # discretize numeric vectors
 #' @rdname discretize
 #' @export
-discretize.numeric <- function(x, nlevels, ...) {
+discretize.numeric <- function(x, nlevels, method = "equal", ...) {
   # check parameter validity
   stopifnot(valid_pos_int(nlevels))
 
+  # decide which function to use to discretize
+  disc_func <- NULL
+  if (method == "equal") {
+    disc_func <- equal_discrete(nlevels)
+  } else {
+    stop("invalid parameter for `method` passed to `discretize` function")
+  }
+
   # split into levels and return discrete value
-  #break_vals <- seq(from = 0, to = nlevels, by = 1) / nlevels * max(x)
-  x %>%
-    cut(breaks = nlevels) %>%
-    as.integer
+  disc_func(x)
 }
 
 # discretize integer vectors
@@ -65,17 +70,50 @@ discretize.FitLandDF <- function(x, nlevels, ...) {
   return(x)
 }
 
-#####HAMMING DISTANCE#####
-# calculate manhattan distance between 2 vectors (of equal length)
-manhattan_dist <- function(x, y) {
-  stopifnot(length(x) == length(y))
+#' Function Factory for Even Discretization Functions
+#'
+#' Returns a function that converts a continuous numeric vector into an integer
+#' vector with discrete levels.
+#'
+#' @param nlevels number of levels to split continuous vector into
+#' @return function that makes a numeric vector discrete
+#' @export
+#' @examples
+#' # test data
+#' x <- 1:10
+#'
+#' # create and apply function to split x into 2 discrete levels
+#' split_2 <- equal_discrete(2)
+#' split_2(x)
+#'
+#' # create and apply function to split x into 5 discrete levels
+#' split_5 <- equal_discrete(5)
+#' split_5(x)
+equal_discrete <- function(nlevels) {
+  function(x) {
+    stopifnot(("numeric" %in% class(x)) | ("integer" %in% class(x)))
 
-  return(sum(abs(x - y)))
+    x %>%
+      cut(breaks = nlevels) %>%
+      as.integer
+  }
 }
+
+#####MANHATTAN DISTANCE#####
+# calculate manhattan distance between 2 vectors (of equal length)
+#manhattan_dist <- function(x, y) {
+#  stopifnot(length(x) == length(y))
+
+#  return(sum(abs(x - y)))
+#}
 
 # manhattan distance function factory (checks manhattan distance < x)
 manhattan <- function(dist = 1) {
-  return(function(x, y) {return(manhattan_dist(x, y) <= dist)})
+  function(x, y) {
+    stopifnot(length(x) == length(y))
+
+    sum(abs(x - y)) <= dist
+  }
 }
 
 #####CO-OCCURRENCE COUNTS#####

@@ -1,4 +1,9 @@
 # generic to get co-occurrence matrix from objects of various classes
+#' Calculate Co-Occurrence Matrix
+#'
+#' Calculate generalized co-occurrence matrix from a variety of objects,
+#' currently including fitness landscapes stored as a `FitLandDF` instance from
+#' the `fitscape` package.
 get_comatrix <- function(x, ...) {
   UseMethod("get_comatrix")
 }
@@ -15,12 +20,12 @@ get_comatrix.default <- function(x, ...) {
 # 4. normalize and return
 get_comatrix.FitLandDF <- function(x,
                                    nlevels,
-                                   discrete = discretize,                    # currently a function from factory
-                                   neighbor = manhattan(1),                  # currently a function from factory
+                                   discrete = equal_discrete(nlevels),       # currently a function from factory - need to export factory
+                                   neighbor = manhattan(1),                  # currently a function from factory - need to export factory
                                    normalize = function(mat) mat / sum(mat), # currently a function
                                    ...) { # doesn't do anything
   # discretize FL (`x`) to `nlevels` levels, equal to integers 1:nlevels
-  x <- discrete(x, nlevels = nlevels)
+  x$Value <- discrete(x$Value)
 
   # initialize co-occurrence matrix with all -1 (zero if actually processed)
   comat <- matrix(-1, nrow = nlevels, ncol = nlevels)
