@@ -83,7 +83,7 @@ correlation.FitLandDF <- function(x, ...) {
 entropy.FitLandDF <- function(x, ...) {
   nlevels=dim(x)[1]
   entropy =  - x * log(x)
-  return(sum(entropy))
+  return(sum(entropy, na.rm=TRUE))
 }
 
 
@@ -129,7 +129,7 @@ sum_avg.FitLandDF <- function(x, ...) {
 sum_entropy.FitLandDF <- function(x, ...) {
   xplusy = p_xplusy.FitLandDF(x)[-1] #Starts at index 2
   sum_entropy = - xplusy * log (xplusy)
-  return(sum(sum_entropy))
+  return(sum(sum_entropy, na.rm=TRUE))
 }
 
 #### DIFFERENCE ENTROPY #####
@@ -156,7 +156,7 @@ autocorr.FitLandDF <- function(x, ...) {
 
 #### DISSIMILARITY #####
 # Dissimilarity is the weighted sum of gray-level differences
-autocorr.FitLandDF <- function(x, ...) {
+diss.FitLandDF <- function(x, ...) {
   diss = 0
   nlevels=dim(x)[1]
   for (i in 1:nlevels){
@@ -167,14 +167,34 @@ autocorr.FitLandDF <- function(x, ...) {
   return(diss)
 }
 
+#### CLUSTER SHADE #####
+# Cluster shade is 3rd order of difference between i + j and mean i + j
+cs.FitLandDF <- function(x, ...) {
+  nlevels=dim(x)[1]
+  mu_x = weighted.mean(1:nlevels, rowSums(x))
+  mu_y = weighted.mean(1:nlevels, colSums(x))
+  cs = 0
+  nlevels=dim(x)[1]
+  for (i in 1:nlevels){
+    for (j in 1:nlevels){
+      cs = cs + (i+j-mu_x - mu_y)**3*x[i,j]
+    }
+  }
+  return(cs)
+}
+
+
 #### CLUSTER PROMINENCE #####
-# Cluster prominence is 4th order sum of
+# Cluster prominence is 4th order of difference between i + j and mean i + j
 cp.FitLandDF <- function(x, ...) {
+  nlevels=dim(x)[1]
+  mu_x = weighted.mean(1:nlevels, rowSums(x))
+  mu_y = weighted.mean(1:nlevels, colSums(x))
   cp = 0
   nlevels=dim(x)[1]
   for (i in 1:nlevels){
     for (j in 1:nlevels){
-      cp = cp + abs(i-j)*x[i,j]
+      cp = cp + (i+j-mu_x - mu_y)**4*x[i,j]
     }
   }
   return(cp)
