@@ -3,16 +3,19 @@
 \name{comat}
 \alias{comat}
 \alias{get_comatrix}
+\alias{get_comatrix.default}
 \alias{get_comatrix.FitLandDF}
 \title{Calculate Co-Occurrence Matrix}
 \usage{
 get_comatrix(x, ...)
 
+\method{get_comatrix}{default}(x, ...)
+
 \method{get_comatrix}{FitLandDF}(
   x,
   discrete = equal_discrete(2),
   neighbor = manhattan(1),
-  normalize = function(mat) mat/sum(mat),
+  normalize = normalize_glcm,
   ...
 )
 }
