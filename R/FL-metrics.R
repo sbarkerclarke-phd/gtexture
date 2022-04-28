@@ -1,12 +1,12 @@
-#### All GLCM functions are applied to normalised co-occurrence matrices 
+#### All GLCM functions are applied to normalised co-occurrence matrices
 # These are square matrices of size n_levels x n_levels
 # where n_levels is the number of discretized fitness levels
 #' To generate a random co-occurrence matrix in a system with 3 levels
-#' x = matrix(sample.int(9,size=9, replace=TRUE), ncol=3)
-#' x = x/sum(x)
+#' x = matrix(sample.int(9, size = 9, replace = TRUE), ncol = 3)
+#' x = x / sum(x)
 
 #### P x-y ####
-# This is the marginal probability of specific differences between x and y 
+# This is the marginal probability of specific differences between x and y
 p_xsuby.FitLandDF <- function(x, axis, ...) {
   nlevels=dim(x)[1]
   #p_k=c()
@@ -22,7 +22,7 @@ p_xsuby.FitLandDF <- function(x, axis, ...) {
 
 
 #### P x+y ####
-# This is the marginal probability of specific sums of x and y 
+# This is the marginal probability of specific sums of x and y
 p_xplusy.FitLandDF <- function(x, axis, ...) {
     nlevels=dim(x)[1]
     #p_k=c()
@@ -36,19 +36,8 @@ p_xplusy.FitLandDF <- function(x, axis, ...) {
     return(p_k)
   }
 
-
-
-#### ENERGY ####
-# Energy is the sum of all elements of the co-occurrence matrix squared
-
-energy.FitLandDF <- function(x, ...) {
- energy = sum(x^2)
- return(energy)
-}
-
-
 ##### CONTRAST #####
-# Contrast (also known as homogeneity) is the sum of the probability times the difference in neighboring values squared 
+# Contrast (also known as homogeneity) is the sum of the probability times the difference in neighboring values squared
 contrast.FitLandDF <- function(x, ...) {
   nlevels=dim(x)[1]
   c =  0
@@ -88,7 +77,7 @@ entropy.FitLandDF <- function(x, ...) {
 
 
 #### INVERSE DIFFERENCE MOMENT #####
-# IDM 
+# IDM
 idm.FitLandDF <- function(x, ...) {
   nlevels=dim(x)[1]
   idm =  0
@@ -120,7 +109,7 @@ sum_avg.FitLandDF <- function(x, ...) {
   p_xplusy = p_xplusy.FitLandDF(x)[-1]
   nlevels=dim(x)[1]
   i = 2:(2*nlevels)
-  sum_avg = i * p_xplusy 
+  sum_avg = i * p_xplusy
   return(sum(sum_avg))
 }
 

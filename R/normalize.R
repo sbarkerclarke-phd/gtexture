@@ -18,6 +18,7 @@ normalize_glcm <- function(mat) {
   # ensure valid GLCM is passed in mat
   stopifnot(is.numeric(mat))
   stopifnot(sum(is.na(mat)) == 0)
+  stopifnot(nrow(mat) == ncol(mat))
 
   # normalize and return
   mat / sum(mat)

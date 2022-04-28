@@ -37,6 +37,8 @@ get_comatrix <- function(x, ...) {
 }
 
 # default not defined
+#' @rdname comat
+#' @export
 get_comatrix.default <- function(x, ...) {
   stop("default behavior for get_comatrix not yet defined")
 }
@@ -51,7 +53,7 @@ get_comatrix.default <- function(x, ...) {
 get_comatrix.FitLandDF <- function(x,
                                    discrete = equal_discrete(2),             # currently a function from factory - need to export factory
                                    neighbor = manhattan(1),                  # currently a function from factory - need to export factory
-                                   normalize = function(mat) mat / sum(mat), # currently a function
+                                   normalize = normalize_glcm,               # currently a function
                                    ...) { # doesn't do anything
   # discretize FL (`x`) to `nlevels` levels, equal to integers 1:nlevels
   x$Value <- discrete(x$Value)
