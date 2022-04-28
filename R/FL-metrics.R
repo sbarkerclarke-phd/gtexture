@@ -37,21 +37,22 @@ p_xplusy.FitLandDF <- function(x, axis, ...) {
   }
 
 ##### CORRELATION #####
+# COMMENTED OUT BECAUSE UNABLE TO FIND WEIGHTED VAR FUNCTION
 # Correlation is the correlation between neighboring fitness values
-correlation.FitLandDF <- function(x, ...) {
-  nlevels=dim(x)[1]
-  mu_x = weighted.mean(1:nlevels, rowSums(x))
-  mu_y = weighted.mean(1:nlevels, colSums(x))
-  sd_x = sqrt(weighted.var(1:nlevels, rowSums(x)))
-  sd_y = sqrt(weighted.var(1:nlevels, colSums(x)))
-  corr =  0
-  for (i in 1:nlevels){
-    for (j in 1:nlevels){
-      corr = corr + ((i-mu_x)*(j-mu_y)) * x[i,j]
-    }
-  }
-  return((corr/(sd_x*sd_y))[1,1])
-}
+#correlation.FitLandDF <- function(x, ...) {
+#  nlevels=dim(x)[1]
+#  mu_x = weighted.mean(1:nlevels, rowSums(x))
+#  mu_y = weighted.mean(1:nlevels, colSums(x))
+#  sd_x = sqrt(weighted.var(1:nlevels, rowSums(x)))
+#  sd_y = sqrt(weighted.var(1:nlevels, colSums(x)))
+#  corr =  0
+#  for (i in 1:nlevels){
+#    for (j in 1:nlevels){
+#      corr = corr + ((i-mu_x)*(j-mu_y)) * x[i,j]
+#    }
+#  }
+#  return((corr/(sd_x*sd_y))[1,1])
+#}
 
 #### SUM AVERAGE #####
 # Sum average is the mean value of the sum in marginal distribution px+y
