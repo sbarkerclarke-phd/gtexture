@@ -28,7 +28,7 @@ inverse difference metric of \code{x}
 \description{
 Calculate the inverse difference feature or metric for a gray-level co-occurrence
 matrix. For definition and application, see Lofstedt et al. (2019)
-\url{doi:10.1371/journal.pone.0212110}.
+\doi{10.1371/journal.pone.0212110}.
 }
 \examples{
 ## calculate inverse difference of arbitrary GLCM

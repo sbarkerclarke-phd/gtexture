@@ -28,7 +28,7 @@ homogeneity metric of \code{x}
 \description{
 Calculate the homogeneity feature or metric for a gray-level co-occurrence
 matrix. For definition and application, see Lofstedt et al. (2019)
-\url{doi:10.1371/journal.pone.0212110}.
+\doi{10.1371/journal.pone.0212110}.
 }
 \examples{
 ## calculate homogeneity of arbitrary GLCM

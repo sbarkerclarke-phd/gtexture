@@ -5,7 +5,7 @@
 #'
 #' Calculate the autocorrelation feature or metric for a gray-level co-occurrence
 #' matrix. For definition and application, see Lofstedt et al. (2019)
-#' <doi:10.1371/journal.pone.0212110>.
+#' \doi{10.1371/journal.pone.0212110}.
 #'
 #' @name autocorrelation
 #' @param x gray-level co-occurrence matrix
@@ -81,7 +81,7 @@ autocorrelation.FitLandDF <- function(x, nlevels, ...) {
 #'
 #' Calculate the cluster prominence feature or metric for a gray-level co-occurrence
 #' matrix. For definition and application, see Lofstedt et al. (2019)
-#' <doi:10.1371/journal.pone.0212110>.
+#' \doi{10.1371/journal.pone.0212110}.
 #'
 #' @name cluster_prom
 #' @param x gray-level co-occurrence matrix
@@ -158,7 +158,7 @@ cluster_prom.FitLandDF <- function(x, nlevels, ...) {
 #'
 #' Calculate the cluster shade feature or metric for a gray-level co-occurrence
 #' matrix. For definition and application, see Lofstedt et al. (2019)
-#' <doi:10.1371/journal.pone.0212110>.
+#' \doi{10.1371/journal.pone.0212110}.
 #'
 #' @name cluster_shade
 #' @param x gray-level co-occurrence matrix
@@ -235,7 +235,7 @@ cluster_shade.FitLandDF <- function(x, nlevels, ...) {
 #'
 #' Calculate the contrast feature or metric for a gray-level co-occurrence
 #' matrix. For definition and application, see Lofstedt et al. (2019)
-#' <doi:10.1371/journal.pone.0212110>.
+#' \doi{10.1371/journal.pone.0212110}.
 #'
 #' @name contrast
 #' @param x gray-level co-occurrence matrix
@@ -313,7 +313,7 @@ contrast.FitLandDF <- function(x, nlevels, ...) {
 #'
 #' Calculate the energy feature or metric for a gray-level co-occurrence
 #' matrix. For definition and application, see Lofstedt et al. (2019)
-#' <doi:10.1371/journal.pone.0212110>.
+#' \doi{10.1371/journal.pone.0212110}.
 #'
 #' @name energy
 #' @param x gray-level co-occurrence matrix
@@ -385,7 +385,7 @@ energy.FitLandDF <- function(x, nlevels, ...) {
 #'
 #' Calculate the entropy feature or metric for a gray-level co-occurrence
 #' matrix. For definition and application, see Lofstedt et al. (2019)
-#' <doi:10.1371/journal.pone.0212110>.
+#' \doi{10.1371/journal.pone.0212110}.
 #'
 #' @name entropy
 #' @param x gray-level co-occurrence matrix
@@ -455,7 +455,7 @@ entropy.FitLandDF <- function(x, nlevels, ...) {
 #'
 #' Calculate the homogeneity feature or metric for a gray-level co-occurrence
 #' matrix. For definition and application, see Lofstedt et al. (2019)
-#' <doi:10.1371/journal.pone.0212110>.
+#' \doi{10.1371/journal.pone.0212110}.
 #'
 #' @name homogeneity
 #' @param x gray-level co-occurrence matrix
@@ -531,7 +531,7 @@ homogeneity.FitLandDF <- function(x, nlevels, ...) {
 #'
 #' Calculate the inverse difference feature or metric for a gray-level co-occurrence
 #' matrix. For definition and application, see Lofstedt et al. (2019)
-#' <doi:10.1371/journal.pone.0212110>.
+#' \doi{10.1371/journal.pone.0212110}.
 #'
 #' @name inv_diff
 #' @param x gray-level co-occurrence matrix
@@ -607,7 +607,7 @@ inv_diff.FitLandDF <- function(x, nlevels, ...) {
 #'
 #' Calculate the maximum probability feature or metric for a gray-level co-occurrence
 #' matrix. For definition and application, see Lofstedt et al. (2019)
-#' <doi:10.1371/journal.pone.0212110>.
+#' \doi{10.1371/journal.pone.0212110}.
 #'
 #' @name max_prob
 #' @param x gray-level co-occurrence matrix
@@ -677,7 +677,7 @@ max_prob.FitLandDF <- function(x, nlevels, ...) {
 #'
 #' Calculate the sum of squares feature or metric for a gray-level co-occurrence
 #' matrix. For definition and application, see Lofstedt et al. (2019)
-#' <doi:10.1371/journal.pone.0212110>.
+#' \doi{10.1371/journal.pone.0212110}.
 #'
 #' @name sum_squares
 #' @param x gray-level co-occurrence matrix
