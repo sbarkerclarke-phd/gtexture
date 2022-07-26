@@ -78,3 +78,58 @@ get_comatrix.FitLandDF <- function(x,
   # return co-occurrence matrix
   return(comat)
 }
+
+#'Method to get comatrix from igraph object + named values
+#
+#' @param values named numeric with values corresponding to the nodes in x.
+#'
+#' @rdname comat
+#' @export
+#'
+get_comatrix.igraph <- function(x, values, nlevels=length(unique(values)),
+                                normalize = normalize_glcm){
+
+
+  names_bool <- (!is.null(names(values)) & !is.null(names(igraph::V(x))))
+  if(names_bool) {
+    iter_vec <- as.character(names(igraph::V(x))) #iterate through names if we have them
+  } else {
+    iter_vec <-  1:length(igraph::V(x))
+  }
+  adj_list <- igraph::as_adj_list(x)
+
+  if(length(adj_list) > length(values)) {
+    message("node values not provided for every node, missing values defaulting to 0")
+  }
+
+
+  Value <- discretize(values, nlevels)
+  if(names_bool) {
+    names(Value) <- names(values)
+  }
+  comat <- matrix(-1, nrow = nlevels,
+                  ncol = nlevels) #initialize with -1s
+  # count co-occurrences
+  for (i in iter_vec) {
+    #print(i)
+    for (j in 1:length(adj_list[[i]])) {
+      #print(j)
+      #Need to treat things a bit differently if there are names
+      if(names_bool) {
+        j_index = names(adj_list[[i]][[j]])
+      } else {
+        j_index = adj_list[[i]][[j]]
+      }
+      ii = Value[i]
+      jj = Value[adj_list[[i]][j]]
+      if(is.na(jj)) {
+        jj=0
+      }
+      comat[ii, jj] <- comat[ii,jj] + 1
+    }
+  }
+
+  comat <- comat+1
+  comat <- normalize(comat)
+  return(comat)
+}

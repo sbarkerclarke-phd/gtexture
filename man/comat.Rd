@@ -5,6 +5,7 @@
 \alias{get_comatrix}
 \alias{get_comatrix.default}
 \alias{get_comatrix.FitLandDF}
+\alias{get_comatrix.igraph}
 \title{Calculate Co-Occurrence Matrix}
 \usage{
 get_comatrix(x, ...)
@@ -18,6 +19,8 @@ get_comatrix(x, ...)
   normalize = normalize_glcm,
   ...
 )
+
+\method{get_comatrix}{igraph}(x, values)
 }
 \arguments{
 \item{x}{object upon which co-occurrence matrix will be calculated}
@@ -31,6 +34,8 @@ acceptable distance of one another or a single-element \code{character} vector
 that describes how to identify acceptable neighbors/offsets}
 
 \item{normalize}{function that normalizes the co-occurrence matrix}
+
+\item{values}{named numeric with values corresponding to the nodes in x.}
 }
 \value{
 co-occurrence matrix
