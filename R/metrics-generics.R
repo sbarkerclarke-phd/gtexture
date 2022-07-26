@@ -436,8 +436,9 @@ entropy.matrix <- function(x, ...) {
   # normalization
   n_x <- normalize_glcm(x)
 
+  zero_correction=1e-8
   # calculation
-  -sum(n_x * log(n_x))
+  -sum(n_x * log(n_x + zero_correction))
 }
 
 #' @rdname entropy
