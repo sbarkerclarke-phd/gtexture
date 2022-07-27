@@ -82,54 +82,73 @@ get_comatrix.FitLandDF <- function(x,
 #'Method to get comatrix from igraph object + named values
 #
 #' @param values named numeric with values corresponding to the nodes in x.
-#'
+#' @param nlevels int specifying number of levels to discretize values into.
 #' @rdname comat
 #' @export
+#'
+#' @importFrom rlang .data
+#' @importFrom magrittr %>%
 #'
 get_comatrix.igraph <- function(x, values, nlevels=length(unique(values)),
                                 normalize = normalize_glcm){
 
 
   names_bool <- (!is.null(names(values)) & !is.null(names(igraph::V(x))))
-  if(names_bool) {
-    iter_vec <- as.character(names(igraph::V(x))) #iterate through names if we have them
-  } else {
-    iter_vec <-  1:length(igraph::V(x))
+  #handle a situation where the results would be super confusing
+  if(length(igraph::V(x)) != length(values)) {
+    if(!names_bool) {
+      stop("Mismatched number of nodes in provided graph and node attributes.
+           Either provide an equal number of nodes and node attributes in values or
+           provide a graph with named vertices and named values")
+    }
+    message("node values not provided for every node, removing nodes without provided attributes from graph")
   }
-  adj_list <- igraph::as_adj_list(x)
-
-  if(length(adj_list) > length(values)) {
-    message("node values not provided for every node, missing values defaulting to 0")
-  }
 
 
+  #this is gross but we need to join the same values on different columns so I'm going to call them different things
   Value <- discretize(values, nlevels)
   if(names_bool) {
     names(Value) <- names(values)
-  }
-  comat <- matrix(-1, nrow = nlevels,
-                  ncol = nlevels) #initialize with -1s
-  # count co-occurrences
-  for (i in iter_vec) {
-    #print(i)
-    for (j in 1:length(adj_list[[i]])) {
-      #print(j)
-      #Need to treat things a bit differently if there are names
-      if(names_bool) {
-        j_index = names(adj_list[[i]][[j]])
-      } else {
-        j_index = adj_list[[i]][[j]]
-      }
-      ii = Value[i]
-      jj = Value[adj_list[[i]][j]]
-      if(is.na(jj)) {
-        jj=0
-      }
-      comat[ii, jj] <- comat[ii,jj] + 1
-    }
+    val_df1 <- data.frame(V1 = names(Value), val1 = Value)
+    val_df2 <- data.frame(V2 = names(Value), val2 = Value)
+  } else {
+    val_df1 <- data.frame(V1 = 1:length(Value), val1 = Value)
+    val_df2 <- data.frame(V2 = 1:length(Value), val2 = Value)
   }
 
-  comat <- comat+1
+  #now create edge df from edge list
+  edge_list <- igraph::as_edgelist(x)
+  edge_df <- as.data.frame(edge_list)
+
+  #join the discretised values onto each node
+  comat <- dplyr::left_join(edge_df, val_df1) %>%
+    dplyr::left_join(val_df2) %>%
+    dplyr::filter(!is.na(.data$val1), !is.na(.data$val2)) %>%
+    dplyr::group_by(.data$val1, .data$val2) %>%
+    dplyr::summarise(n = dplyr::n())
+
+  #figure out which vals aren't represented in val1 and then also val2
+  notin1 <- (1:nlevels)[!(1:nlevels %in% unique(comat$val1))]
+  notin2 <- (1:nlevels)[!(1:nlevels %in% unique(comat$val2))]
+
+  if(length(notin1) + length(notin2) != 0) {
+    #Need to handle situations where there are mismatches between notin1 and notin2
+    notin <- unique(c(notin1,notin2))
+    notin_df <- data.frame(val1 = notin, val2 = notin, n = 0)
+    comat <- comat %>% bind_rows(notin_df)
+  }
+
+  #join with comat
+  comat <- comat %>%
+    dplyr::arrange(-dplyr::desc(.data$val1)) %>%
+    tidyr::pivot_wider(names_from = .data$val2, values_from = n,
+                       names_sort = TRUE, values_fill = 0) %>%
+    dplyr::ungroup() %>%
+    dplyr::select(-.data$val1) %>%
+    as.matrix()
+
   comat <- normalize(comat)
   return(comat)
 }
+
+

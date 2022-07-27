@@ -20,7 +20,12 @@ get_comatrix(x, ...)
   ...
 )
 
-\method{get_comatrix}{igraph}(x, values)
+\method{get_comatrix}{igraph}(
+  x,
+  values,
+  nlevels = length(unique(values)),
+  normalize = normalize_glcm
+)
 }
 \arguments{
 \item{x}{object upon which co-occurrence matrix will be calculated}
