@@ -1,66 +1,32 @@
 #setup
-#
+
+df <- data.frame(from = c("a", "b", "c", "d", "a", "e", "e", "b"),
+                 to = c("b", "a", "a", "a", "e", "b", "c", "d"))
+g_named = igraph::graph_from_data_frame(df)
+vals_named = 1:5
+names(vals_named) = letters[1:5]
 
 test_that("co-occurence matrix calculation works with igraph obj with named nodes", {
- expect_equal(2+2, 4)
+ comat = get_comatrix(g_named, vals_named)
+ expect_equal(colnames(comat), as.character(1:5)) #make sure cols are in the right order
+ expect_equal(nrow(comat), ncol(comat)) #make sure its square
+ expect_equal(sum(is.na(comat)), 0) #make sure no NAs snuck through
+ expect_equal(sum(comat>=1), 0) #make sure it got normalized
 })
 
-
+g = igraph::sample_gnp(n=10, p=0.2)
+vals = 1:10
 test_that("co-occurence matrix calculation works with igraph obj with unnamed nodes", {
-  expect_equal(2+2, 4)
+  comat = get_comatrix(g, vals)
+  expect_equal(colnames(comat), as.character(1:10)) #make sure cols are in the right order
+  expect_equal(nrow(comat), ncol(comat)) #make sure its square
+  expect_equal(sum(is.na(comat)), 0) #make sure no NAs snuck through
+  expect_equal(sum(comat>=1), 0) #make sure it got normalized
+})
+
+vals= 1:9
+test_that("co-occurence matrix calculation breaks with unnamed nodes when not enough values are provided", {
+  expect_error(get_comatrix(g, vals))
 })
 
 
-test_that("calculation of metric variables works", {
-  # setup test data
-  test_mat <- matrix(1:9, nrow = 3)
-  n_mat <- normalize_glcm(test_mat)
-
-  # p
-  for (i in seq_len(nrow(n_mat))) {
-    for (j in seq_len(ncol(n_mat))) {
-      expect_equal(p(n_mat, i, j), n_mat[i, j])
-    }
-  }
-
-  # p_x
-  for (i in seq_len(nrow(n_mat))) {
-    expect_equal(p_x(n_mat, i), sum(n_mat[i, ]))
-  }
-
-  # p_y
-  for (j in seq_len(ncol(n_mat))) {
-    expect_equal(p_y(n_mat, j), sum(n_mat[, j]))
-  }
-
-  # mu_x; manually calculated
-  expect_equal(mu_x(n_mat), 2.1 + 1 / 30)
-
-  # mu_y; manually calculated
-  expect_equal(mu_y(n_mat), 2.4)
-
-  # var_x
-
-  # var_y
-
-  # p_xplusy
-
-  # p_xminusy
-
-  # mu_xplusy
-
-  # mu_xminusy
-
-  # HX
-
-  # HY
-
-  # HXY
-
-  # HXY1
-
-  # HXY2
-
-  # Q
-
-})

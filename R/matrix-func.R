@@ -82,7 +82,7 @@ get_comatrix.FitLandDF <- function(x,
 #'Method to get comatrix from igraph object + named values
 #
 #' @param values named numeric with values corresponding to the nodes in x.
-#'
+#' @param nlevels int specifying number of levels to discretize values into.
 #' @rdname comat
 #' @export
 #'
@@ -102,11 +102,6 @@ get_comatrix.igraph <- function(x, values, nlevels=length(unique(values)),
            provide a graph with named vertices and named values")
     }
     message("node values not provided for every node, removing nodes without provided attributes from graph")
-  }
-  if(names_bool) {
-    iter_vec <- as.character(names(igraph::V(x))) #iterate through names if we have them
-  } else {
-    iter_vec <-  1:length(igraph::V(x))
   }
 
 
@@ -136,19 +131,21 @@ get_comatrix.igraph <- function(x, values, nlevels=length(unique(values)),
   notin1 <- (1:nlevels)[!(1:nlevels %in% unique(comat$val1))]
   notin2 <- (1:nlevels)[!(1:nlevels %in% unique(comat$val2))]
 
-  #create df
-  notin_df <- data.frame(val1 = notin1, val2 = notin2, n=0)
+  if(length(notin1) + length(notin2) != 0) {
+    #Need to handle situations where there are mismatches between notin1 and notin2
+    notin <- unique(c(notin1,notin2))
+    notin_df <- data.frame(val1 = notin, val2 = notin, n = 0)
+    comat <- comat %>% bind_rows(notin_df)
+  }
 
   #join with comat
   comat <- comat %>%
-    dplyr::bind_rows(notin_df) %>%
-    dplyr::arrange(-dplyr::desc(val1)) %>%
-    tidyr::pivot_wider(names_from = .data$val2, values_from = n) %>%
+    dplyr::arrange(-dplyr::desc(.data$val1)) %>%
+    tidyr::pivot_wider(names_from = .data$val2, values_from = n,
+                       names_sort = TRUE, values_fill = 0) %>%
     dplyr::ungroup() %>%
     dplyr::select(-.data$val1) %>%
     as.matrix()
-
-  comat[is.na(comat)] <- 0
 
   comat <- normalize(comat)
   return(comat)
