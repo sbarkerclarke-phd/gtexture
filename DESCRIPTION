@@ -22,7 +22,9 @@ Encoding: UTF-8
 Imports: 
     fitscape (>= 0.1),
     magrittr (>= 2.0),
-    dplyr (>= 1.0)
+    dplyr (>= 1.0),
+    rlang, 
+    tidyr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 URL: https://sbarkerclarke-phd.github.io/CoOccurR/
