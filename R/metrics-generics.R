@@ -115,7 +115,7 @@ autocorrelation.FitLandDF <- function(x, nlevels, ...) {
 #' my_glcm <- get_comatrix(my_landscape, discrete = equal_discrete(2))
 #'
 #' # calculate correlation of extracted GLCM
-#' correlation(my_glcm)  # should match value of above autocorrelation function call
+#' correlation(my_glcm)  # should match value of above correlation function call
 correlation <- function(x, ...) {
   UseMethod("correlation")
 }
@@ -127,12 +127,16 @@ correlation.default <- function(x, ...) {
   stop("default behavior has not been defined for autocorrelation")
 }
 
+# matrix correlation
 #' @rdname correlation
 #' @export
 correlation.matrix <- function(x, ...) {
+  
   # normalization step
   n_x <- normalize_glcm(x)
   glcm <- n_x
+  
+  # calculation steps
   mu_i = rep(0,dim(glcm)[1])
     for(i in 1:dim(glcm)[1]){
       for(j in 1:dim(glcm)[1]){

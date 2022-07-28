@@ -100,3 +100,17 @@ equal_discrete <- function(nlevels) {
       as.integer
   }
 }
+
+#' @param nlevels number of levels to split continuous vector into
+#' @return function that makes a numeric vector discrete
+#' @export
+kmeans_discrete <- function(nlevels){
+  function(x){
+    stopifnot(("numeric" %in% class(x)) | ("integer" %in% class(x)))
+    
+    bins = dlookr::binning(x, nlevels, type="kmeans")
+    levels(bins) = seq(1,nlevels)
+    extract(bins) %>% as.integer
+  }
+
+}
