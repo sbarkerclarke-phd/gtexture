@@ -41,6 +41,8 @@ that describes how to identify acceptable neighbors/offsets}
 \item{normalize}{function that normalizes the co-occurrence matrix}
 
 \item{values}{named numeric with values corresponding to the nodes in x.}
+
+\item{nlevels}{int specifying number of levels to discretize values into.}
 }
 \value{
 co-occurrence matrix
