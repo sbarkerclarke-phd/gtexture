@@ -41,12 +41,6 @@ n_x <- normalize_glcm(x)
 # calculate contrast
 contrast(n_x)
 
-## calculate contrast of arbitrary fitness landscape
-# create fitness landscape using FitLandDF object
-vals <- runif(64)
-vals <- array(vals, dim = rep(4, 3))
-my_landscape <- fitscape::FitLandDF(vals)
-
 # calculate contrast of fitness landscape, assuming 2 discrete gray levels
 contrast(my_landscape, nlevels = 2)
 

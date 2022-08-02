@@ -1,5 +1,3 @@
-#####DISCRETIZE#####
-# discretize fitness landscape values (numeric) into integer levels
 #' Discretize Numeric Variable Into Categories
 #'
 #' Takes a numeric variable (could be of class `numeric` or `integer`) and
@@ -101,6 +99,8 @@ equal_discrete <- function(nlevels) {
   }
 }
 
+#' Kmeans clustering discretization 
+#' Splitting of a vector of continuous values into k groups
 #' @param nlevels number of levels to split continuous vector into
 #' @return function that makes a numeric vector discrete
 #' @export

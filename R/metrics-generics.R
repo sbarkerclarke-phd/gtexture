@@ -1,4 +1,4 @@
-# each of the metrics normalizees the GLCM, then applies the metric itself
+# each of the metrics normalizes the GLCM, then applies the metric itself
 
 #####AUTOCORRELATION#####
 #' Autocorrelation Metric for a GLCM
@@ -80,7 +80,7 @@ autocorrelation.FitLandDF <- function(x, nlevels, ...) {
 #####CORRELATION#####
 #' Correlation Metric for a GLCM
 #'
-#' Calculate the autocorrelation feature or metric for a gray-level co-occurrence
+#' Calculate the correlation feature or metric for a gray-level co-occurrence
 #' matrix. For definition and application, see Lofstedt et al. (2019)
 #' \doi{10.1371/journal.pone.0212110}.
 #'
@@ -124,61 +124,22 @@ correlation <- function(x, ...) {
 #' @rdname correlation
 #' @export
 correlation.default <- function(x, ...) {
-  stop("default behavior has not been defined for autocorrelation")
+  stop("default behavior has not been defined for correlation")
 }
 
 # matrix correlation
 #' @rdname correlation
 #' @export
-correlation.matrix <- function(x, ...) {
-  
-  # normalization step
-  n_x <- normalize_glcm(x)
-  glcm <- n_x
-  
-  # calculation steps
-  mu_i = rep(0,dim(glcm)[1])
-    for(i in 1:dim(glcm)[1]){
-      for(j in 1:dim(glcm)[1]){
-        mu_i[i] = mu_i[i] +  i*glcm[i,j]
-      }}
-    
-    mu_j = rep(0,dim(glcm)[1])
-    for(i in 1:dim(glcm)[1]){
-      for(j in 1:dim(glcm)[1]){
-        mu_j[j] = mu_j[j] +  j*glcm[i,j]
-      }}
-    
-    sigma_i = rep(0,dim(glcm)[1])
-    for(i in 1:dim(glcm)[1]){
-      for(j in 1:dim(glcm)[1]){
-        sigma_i[i] = sigma_i[i] + (i-mu_i[i])**2*glcm[i,j]
-      }}
-    
-    sigma_j = rep(0,dim(glcm)[1])
-    for(i in 1:dim(glcm)[1]){
-      for(j in 1:dim(glcm)[1]){
-        sigma_j[j] = sigma_j[j] + (j-mu_j[j])**2*glcm[i,j]
-      }}
-    
-    
-    for(i in 1:dim(glcm)[1]){
-      for(j in 1:dim(glcm)[1]){
-        mui = mu_i[i]
-        sigmai = sqrt(sigma_i[i])
-        #print(mui)
-        muj = mu_j[j]
-        sigmaj = sqrt(sigma_j[j])
-        sigmaj = ifelse(sigmaj==0, 1, sigmaj)
-        sigmai = ifelse(sigmai==0, 1, sigmai)
-        glcm[i,j] = glcm[i,j]*((i-mui)/sigmai)*((j-muj)/sigmaj) 
-      }
+correlation.matrix <- function(glcm, ...) {
+  sum <- 0
+  mean <- glcm_mean(glcm)
+  variance <- glcm_variance(glcm)
+  for(i in 1:nrow(glcm)){
+    for(j in 1:ncol(glcm)){
+      sum <- sum + glcm[i,j]*(((i-1) - mean)*((j-1) - mean))/variance
     }
-    
-    #print(mu_i, mu_j, sigma_i, sigma_j)
-    correlation = sum(glcm)
-  n_x = glcm
-  sum(n_x)
+  }
+  return(sum)
 }
 
 #' @rdname correlation
@@ -370,12 +331,6 @@ cluster_shade.FitLandDF <- function(x, nlevels, ...) {
 #'
 #' # calculate contrast
 #' contrast(n_x)
-#'
-#' ## calculate contrast of arbitrary fitness landscape
-#' # create fitness landscape using FitLandDF object
-#' vals <- runif(64)
-#' vals <- array(vals, dim = rep(4, 3))
-#' my_landscape <- fitscape::FitLandDF(vals)
 #'
 #' # calculate contrast of fitness landscape, assuming 2 discrete gray levels
 #' contrast(my_landscape, nlevels = 2)
