@@ -90,7 +90,7 @@ get_comatrix.FitLandDF <- function(x,
 #' @importFrom magrittr %>%
 #'
 get_comatrix.igraph <- function(x, values, nlevels=length(unique(values)),
-                                normalize = normalize_glcm){
+                                normalize = normalize_glcm, verbose = TRUE){
 
 
   names_bool <- (!is.null(names(values)) & !is.null(names(igraph::V(x))))
@@ -101,7 +101,9 @@ get_comatrix.igraph <- function(x, values, nlevels=length(unique(values)),
            Either provide an equal number of nodes and node attributes in values or
            provide a graph with named vertices and named values")
     }
-    message("node values not provided for every node, removing nodes without provided attributes from graph")
+    if(verbose) {
+      message("node values not provided for every node, removing nodes without provided attributes from graph")
+    }
   }
 
 
@@ -121,8 +123,8 @@ get_comatrix.igraph <- function(x, values, nlevels=length(unique(values)),
   edge_df <- as.data.frame(edge_list)
 
   #join the discretised values onto each node
-  comat <- dplyr::left_join(edge_df, val_df1) %>%
-    dplyr::left_join(val_df2) %>%
+  comat <- dplyr::left_join(edge_df, val_df1, by = c("V1")) %>%
+    dplyr::left_join(val_df2, by = c("V2")) %>%
     dplyr::filter(!is.na(.data$val1), !is.na(.data$val2)) %>%
     dplyr::group_by(.data$val1, .data$val2) %>%
     dplyr::summarise(n = dplyr::n())
