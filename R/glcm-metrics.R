@@ -158,7 +158,7 @@ glcm_variance <- function(glcm){
 }
 
 #' @describeIn glcm_metrics Correlation
-#' 
+#' @export 
 correlation.matrix <- function(glcm){
   sum <- 0
   mean <- glcm_mean(glcm)
