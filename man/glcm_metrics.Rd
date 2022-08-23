@@ -44,22 +44,22 @@ GLCM Metrics
 }
 \section{Functions}{
 \itemize{
-\item \code{glcm_mean}: Mean
+\item \code{glcm_mean()}: Mean
 
-\item \code{glcm_mean.df}: Mean.df
+\item \code{glcm_mean.df()}: Mean.df
 
-\item \code{glcm_mean.matrix}: Mean.matrix
+\item \code{glcm_mean.matrix()}: Mean.matrix
 
-\item \code{mu_x.matrix}: mu_x
+\item \code{mu_x.matrix()}: mu_x
 
-\item \code{mu_y.matrix}: mu_y
+\item \code{mu_y.matrix()}: mu_y
 
-\item \code{glcm_variance}: Variance
+\item \code{glcm_variance()}: Variance
 
-\item \code{correlation.matrix}: Correlation
+\item \code{correlation(matrix)}: Correlation
 
-\item \code{differenceEntropy.matrix}: Difference Entropy
+\item \code{differenceEntropy.matrix()}: Difference Entropy
 
-\item \code{dissimilarity.matrix}: Dissimilarity
+\item \code{dissimilarity.matrix()}: Dissimilarity
+
 }}
-
