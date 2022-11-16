@@ -25,7 +25,8 @@ Imports:
     dplyr (>= 1.0),
     rlang, 
     tidyr, 
-    igraph
+    igraph, 
+    dlookr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 URL: https://sbarkerclarke-phd.github.io/CoOccurR/

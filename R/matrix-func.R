@@ -12,6 +12,9 @@
 #'   acceptable distance of one another or a single-element `character` vector
 #'   that describes how to identify acceptable neighbors/offsets
 #' @param normalize function that normalizes the co-occurrence matrix
+#' @param values named numeric with values corresponding to the nodes in x.
+#' @param verbose bool
+#' @param nlevels int number of levels to discretize into
 #' @param ... additional arguments
 #' @return co-occurrence matrix
 #' @export
@@ -50,7 +53,7 @@ get_comatrix.default <- function(x, ...) {
 # 4. normalize and return
 #' @rdname comat
 #' @export
-#' 
+#'
 get_comatrix.FitLandDF <- function(x,
                                    discrete = equal_discrete(2),             # currently a function from factory - need to export factory
                                    neighbor = manhattan(1),                  # currently a function from factory - need to export factory
@@ -82,16 +85,13 @@ get_comatrix.FitLandDF <- function(x,
 
 #'Method to get comatrix from igraph object + named values
 #
-#' @param values named numeric with values corresponding to the nodes in x.
-#' @param nlevels int specifying number of levels to discretize values into.
 #' @rdname comat
 #' @export
-#'
 #' @importFrom rlang .data
 #' @importFrom magrittr %>%
 #'
 get_comatrix.igraph <- function(x, values, nlevels=length(unique(values)),
-                                normalize = normalize_glcm, verbose = TRUE){
+                                normalize = normalize_glcm, verbose = TRUE, ...){
 
 
   names_bool <- (!is.null(names(values)) & !is.null(names(igraph::V(x))))
