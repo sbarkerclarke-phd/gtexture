@@ -40,7 +40,7 @@ get_comatrix <- function(x, ...) {
 #' @rdname comat
 #' @export
 get_comatrix.default <- function(x, ...) {
-  stop("default behavior for get_comatrix not yet defined")
+  warning("default behavior for get_comatrix not yet defined")
 }
 
 # for fitness landscapes
@@ -50,6 +50,7 @@ get_comatrix.default <- function(x, ...) {
 # 4. normalize and return
 #' @rdname comat
 #' @export
+#' 
 get_comatrix.FitLandDF <- function(x,
                                    discrete = equal_discrete(2),             # currently a function from factory - need to export factory
                                    neighbor = manhattan(1),                  # currently a function from factory - need to export factory
@@ -152,5 +153,3 @@ get_comatrix.igraph <- function(x, values, nlevels=length(unique(values)),
   comat <- normalize(comat)
   return(comat)
 }
-
-

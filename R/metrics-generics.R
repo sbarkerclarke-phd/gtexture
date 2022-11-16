@@ -76,6 +76,123 @@ autocorrelation.FitLandDF <- function(x, nlevels, ...) {
   autocorrelation.matrix(x_glcm)
 }
 
+
+#####CORRELATION#####
+#' Correlation Metric for a GLCM
+#'
+#' Calculate the autocorrelation feature or metric for a gray-level co-occurrence
+#' matrix. For definition and application, see Lofstedt et al. (2019)
+#' \doi{10.1371/journal.pone.0212110}.
+#'
+#' @name correlation
+#' @param x gray-level co-occurrence matrix
+#' @param nlevels desired number of discrete gray levels
+#' @param ... additional parameters
+#' @return correlation metric of `x`
+#' @export
+#' @examples
+#' ## calculate correlation of arbitrary GLCM
+#' # define arbitrary GLCM
+#' x <- matrix(1:16, nrow = 4)
+#'
+#' # normalize
+#' n_x <- normalize_glcm(x)
+#'
+#' # calculate correlation
+#' correlation(n_x)
+#'
+#' ## calculate autocorrelation of arbitrary fitness landscape
+#' # create fitness landscape using FitLandDF object
+#' vals <- runif(64)
+#' vals <- array(vals, dim = rep(4, 3))
+#' my_landscape <- fitscape::FitLandDF(vals)
+#'
+#' # calculate correlation of fitness landscape, assuming 2 discrete gray levels
+#' correlation(my_landscape, nlevels = 2)
+#'
+#' ## confirm value of correlation for fitness landscape
+#' # extract normalized GLCM from fitness landscape
+#' my_glcm <- get_comatrix(my_landscape, discrete = equal_discrete(2))
+#'
+#' # calculate correlation of extracted GLCM
+#' correlation(my_glcm)  # should match value of above correlation function call
+correlation <- function(x, ...) {
+  UseMethod("correlation")
+}
+
+# default behavior not defined
+#' @rdname correlation
+#' @export
+correlation.default <- function(x, ...) {
+  stop("default behavior has not been defined for autocorrelation")
+}
+
+# matrix correlation
+#' @rdname correlation
+#' @export
+correlation.matrix <- function(x, ...) {
+  
+  # normalization step
+  n_x <- normalize_glcm(x)
+  glcm <- n_x
+  
+  # calculation steps
+  mu_i = rep(0,dim(glcm)[1])
+    for(i in 1:dim(glcm)[1]){
+      for(j in 1:dim(glcm)[1]){
+        mu_i[i] = mu_i[i] +  i*glcm[i,j]
+      }}
+    
+    mu_j = rep(0,dim(glcm)[1])
+    for(i in 1:dim(glcm)[1]){
+      for(j in 1:dim(glcm)[1]){
+        mu_j[j] = mu_j[j] +  j*glcm[i,j]
+      }}
+    
+    sigma_i = rep(0,dim(glcm)[1])
+    for(i in 1:dim(glcm)[1]){
+      for(j in 1:dim(glcm)[1]){
+        sigma_i[i] = sigma_i[i] + (i-mu_i[i])**2*glcm[i,j]
+      }}
+    
+    sigma_j = rep(0,dim(glcm)[1])
+    for(i in 1:dim(glcm)[1]){
+      for(j in 1:dim(glcm)[1]){
+        sigma_j[j] = sigma_j[j] + (j-mu_j[j])**2*glcm[i,j]
+      }}
+    
+    
+    for(i in 1:dim(glcm)[1]){
+      for(j in 1:dim(glcm)[1]){
+        mui = mu_i[i]
+        sigmai = sqrt(sigma_i[i])
+        #print(mui)
+        muj = mu_j[j]
+        sigmaj = sqrt(sigma_j[j])
+        sigmaj = ifelse(sigmaj==0, 1, sigmaj)
+        sigmai = ifelse(sigmai==0, 1, sigmai)
+        glcm[i,j] = glcm[i,j]*((i-mui)/sigmai)*((j-muj)/sigmaj) 
+      }
+    }
+    
+    #print(mu_i, mu_j, sigma_i, sigma_j)
+    correlation = sum(glcm)
+  n_x = glcm
+  sum(n_x)
+}
+
+#' @rdname correlation
+#' @export
+correlation.FitLandDF <- function(x, nlevels, ...) {
+  # get normalized comatrix from fitness landscape
+  x_glcm <- get_comatrix(x, discrete = equal_discrete(nlevels))
+  
+  # calculate
+  correlation.matrix(x_glcm)
+  
+}
+
+
 #####CLUSTER PROMINENCE#####
 #' Cluster Prominence Metric for a GLCM
 #'
@@ -362,7 +479,7 @@ energy.default <- function(x, ...) {
 #' @export
 energy.matrix <- function(x, ...) {
   # normalization step
-  n_x <- normalize_glcm(x)
+  n_x <- normalize_glcm(x) 
 
   # calculation step
   sum(n_x * n_x)
