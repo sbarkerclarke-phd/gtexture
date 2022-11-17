@@ -102,7 +102,7 @@ equal_discrete <- function(nlevels) {
 }
 
 
-#'
+#' Function to discretize based on quantiles
 #' @param nlevels number of levels to split continuous vector into
 #' @return function that makes a numeric vector discrete
 #' @export
@@ -111,7 +111,7 @@ equal_discrete <- function(nlevels) {
 quantile_discrete <- function(nlevels) {
   function(x) {
     stopifnot(("numeric" %in% class(x)) | ("integer" %in% class(x)))
-    
+
     x %>%
       ntile(n= nlevels) %>%
       as.integer
@@ -122,13 +122,15 @@ quantile_discrete <- function(nlevels) {
 
 
 
+#' function to discretize using kmeans
+#'
 #' @param nlevels number of levels to split continuous vector into
 #' @return function that makes a numeric vector discrete
 #' @export
 kmeans_discrete <- function(nlevels){
   function(x){
     stopifnot(("numeric" %in% class(x)) | ("integer" %in% class(x)))
-    
+
     bins = dlookr::binning(x, nlevels, type="kmeans")
     levels(bins) = seq(1,nlevels)
     dlookr::extract(bins) %>% as.integer

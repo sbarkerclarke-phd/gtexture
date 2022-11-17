@@ -24,7 +24,9 @@ get_comatrix(x, ...)
   x,
   values,
   nlevels = length(unique(values)),
-  normalize = normalize_glcm
+  normalize = normalize_glcm,
+  verbose = TRUE,
+  ...
 )
 }
 \arguments{
@@ -42,7 +44,9 @@ that describes how to identify acceptable neighbors/offsets}
 
 \item{values}{named numeric with values corresponding to the nodes in x.}
 
-\item{nlevels}{int specifying number of levels to discretize values into.}
+\item{nlevels}{int number of levels to discretize into}
+
+\item{verbose}{bool}
 }
 \value{
 co-occurrence matrix
