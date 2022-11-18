@@ -874,7 +874,7 @@ sum_squares.FitLandDF <- function(x, nlevels, ...) {
 #' @export
 #'
 #' @returns data.frame
-compute_all_metrics(x) {
+compute_all_metrics <- function(x) {
 
   df = data.frame(
     contrast = contrast(x),

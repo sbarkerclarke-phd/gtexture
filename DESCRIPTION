@@ -1,4 +1,4 @@
-Package: CoOccurR
+Package: gtexture
 Title: Generalized Application of Co-Occurrence Matrices
 Version: 0.0.1
 Authors@R: c(
@@ -31,8 +31,8 @@ Imports:
     dlookr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-URL: https://sbarkerclarke-phd.github.io/CoOccurR/
-BugReports: https://github.com/sbarkerclarke-phd/CoOccurR/issues
+URL: https://sbarkerclarke-phd.github.io/gtexture/
+BugReports: https://github.com/sbarkerclarke-phd/gtexture/issues
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
