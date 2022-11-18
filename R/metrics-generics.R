@@ -131,37 +131,37 @@ correlation.default <- function(x, ...) {
 #' @rdname correlation
 #' @export
 correlation.matrix <- function(x, ...) {
-  
+
   # normalization step
   n_x <- normalize_glcm(x)
   glcm <- n_x
-  
+
   # calculation steps
   mu_i = rep(0,dim(glcm)[1])
     for(i in 1:dim(glcm)[1]){
       for(j in 1:dim(glcm)[1]){
         mu_i[i] = mu_i[i] +  i*glcm[i,j]
       }}
-    
+
     mu_j = rep(0,dim(glcm)[1])
     for(i in 1:dim(glcm)[1]){
       for(j in 1:dim(glcm)[1]){
         mu_j[j] = mu_j[j] +  j*glcm[i,j]
       }}
-    
+
     sigma_i = rep(0,dim(glcm)[1])
     for(i in 1:dim(glcm)[1]){
       for(j in 1:dim(glcm)[1]){
         sigma_i[i] = sigma_i[i] + (i-mu_i[i])**2*glcm[i,j]
       }}
-    
+
     sigma_j = rep(0,dim(glcm)[1])
     for(i in 1:dim(glcm)[1]){
       for(j in 1:dim(glcm)[1]){
         sigma_j[j] = sigma_j[j] + (j-mu_j[j])**2*glcm[i,j]
       }}
-    
-    
+
+
     for(i in 1:dim(glcm)[1]){
       for(j in 1:dim(glcm)[1]){
         mui = mu_i[i]
@@ -171,10 +171,10 @@ correlation.matrix <- function(x, ...) {
         sigmaj = sqrt(sigma_j[j])
         sigmaj = ifelse(sigmaj==0, 1, sigmaj)
         sigmai = ifelse(sigmai==0, 1, sigmai)
-        glcm[i,j] = glcm[i,j]*((i-mui)/sigmai)*((j-muj)/sigmaj) 
+        glcm[i,j] = glcm[i,j]*((i-mui)/sigmai)*((j-muj)/sigmaj)
       }
     }
-    
+
     #print(mu_i, mu_j, sigma_i, sigma_j)
     correlation = sum(glcm)
   n_x = glcm
@@ -186,10 +186,10 @@ correlation.matrix <- function(x, ...) {
 correlation.FitLandDF <- function(x, nlevels, ...) {
   # get normalized comatrix from fitness landscape
   x_glcm <- get_comatrix(x, discrete = equal_discrete(nlevels))
-  
+
   # calculate
   correlation.matrix(x_glcm)
-  
+
 }
 
 
@@ -479,7 +479,7 @@ energy.default <- function(x, ...) {
 #' @export
 energy.matrix <- function(x, ...) {
   # normalization step
-  n_x <- normalize_glcm(x) 
+  n_x <- normalize_glcm(x)
 
   # calculation step
   sum(n_x * n_x)
@@ -865,4 +865,29 @@ sum_squares.FitLandDF <- function(x, nlevels, ...) {
 
   # calculate
   sum_squares.matrix(x_glcm)
+}
+
+#' Convenience function to compute all haralick texture features for a given comat
+#'
+#' @param x matrix computed glcm
+#'
+#' @export
+#'
+#' @returns data.frame
+compute_all_metrics(x) {
+
+  df = data.frame(
+    contrast = contrast(x),
+    entropy =entropy(x),
+    energy = energy(x),
+    autocorrelation = autocorrelation(x),
+    correlation = correlation(x),
+    cluster_prominence = cluster_prom(x),
+    cluster_shade = cluster_shade(x),
+    homogeneity = homogeneity(x),
+    inverse_difference = inv_diff(x),
+    max_probability = max_prob(x),
+    sum_of_squares = sum_squares(x)
+  )
+  return(df)
 }
