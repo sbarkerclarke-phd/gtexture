@@ -1,5 +1,6 @@
 # gtexture: R Package for the calculation of Haralick texture features for graphs and networks
 
+[![R-CMD-check](https://github.com/sbarkerclarke-phd/gtexture/workflows/R-CMD-check/badge.svg)](https://github.com/sbarkerclarke-phd/gtexture/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![CRAN version](http://www.r-pkg.org/badges/version/CoOccurR)](https://CRAN.R-project.org/package=CoOccurR)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/CoOccurR)](https://CRAN.R-project.org/package=CoOccurR)
