@@ -1,5 +1,6 @@
-# CoOccurR: R Package for Generalized Application of Co-Occurrence Matrices
+# gtexture: R Package for the calculation of Haralick texture features for graphs and networks
 
+[![R-CMD-check](https://github.com/sbarkerclarke-phd/gtexture/workflows/R-CMD-check/badge.svg)](https://github.com/sbarkerclarke-phd/gtexture/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![CRAN version](http://www.r-pkg.org/badges/version/CoOccurR)](https://CRAN.R-project.org/package=CoOccurR)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/CoOccurR)](https://CRAN.R-project.org/package=CoOccurR)
@@ -15,14 +16,14 @@ The current focus is, as previously mentioned, on application of GLCMs to fitnes
 
 ## Installation
 
-The CoOccurR R package can be installed as follows:
+The gtexture R package can be installed as follows:
 
 ```r
 # install from CRAN (coming soon)
-# install.packages("CoOccurR")
+# install.packages("gtexture")
 
 # install using the remotes package
-remotes::install_github("sbarkerclarke-phd/CoOccurR")
+remotes::install_github("sbarkerclarke-phd/gtexture")
 ```
 
 ## Features

@@ -130,6 +130,7 @@ correlation.default <- function(x, ...) {
 # matrix correlation
 #' @rdname correlation
 #' @export
+
 correlation.matrix <- function(glcm, ...) {
   sum <- 0
   mean <- glcm_mean(glcm)
@@ -147,10 +148,10 @@ correlation.matrix <- function(glcm, ...) {
 correlation.FitLandDF <- function(x, nlevels, ...) {
   # get normalized comatrix from fitness landscape
   x_glcm <- get_comatrix(x, discrete = equal_discrete(nlevels))
-  
+
   # calculate
   correlation.matrix(x_glcm)
-  
+
 }
 
 
@@ -434,7 +435,7 @@ energy.default <- function(x, ...) {
 #' @export
 energy.matrix <- function(x, ...) {
   # normalization step
-  n_x <- normalize_glcm(x) 
+  n_x <- normalize_glcm(x)
 
   # calculation step
   sum(n_x * n_x)
@@ -820,4 +821,29 @@ sum_squares.FitLandDF <- function(x, nlevels, ...) {
 
   # calculate
   sum_squares.matrix(x_glcm)
+}
+
+#' Convenience function to compute all haralick texture features for a given comat
+#'
+#' @param x matrix computed glcm
+#'
+#' @export
+#'
+#' @returns data.frame
+compute_all_metrics <- function(x) {
+
+  df = data.frame(
+    contrast = contrast(x),
+    entropy =entropy(x),
+    energy = energy(x),
+    autocorrelation = autocorrelation(x),
+    correlation = correlation(x),
+    cluster_prominence = cluster_prom(x),
+    cluster_shade = cluster_shade(x),
+    homogeneity = homogeneity(x),
+    inverse_difference = inv_diff(x),
+    max_probability = max_prob(x),
+    sum_of_squares = sum_squares(x)
+  )
+  return(df)
 }

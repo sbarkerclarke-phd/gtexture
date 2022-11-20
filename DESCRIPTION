@@ -1,13 +1,15 @@
-Package: CoOccurR
-Title: Generalized Application of Co-Occurrence Matrices
+Package: gtexture
+Title: Generalized Application of Co-Occurrence Matrices and Haralick Texture 
 Version: 0.0.1
 Authors@R: c(
-    person("Steph", "Barker-Clarke",
-           email = "OwenS2@ccf.org", role = c("aut", "cre"),
+    person("Rowan", "Barker-Clarke",
+           email = "rowanbarkerclarke@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-1961-7919")),
     person("Raoul", "Wadhwa",
            email = "raoulwadhwa@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0003-0503-9580")),
+    person("Davis", "Weaver",
+            role = "aut"),
     person("Jacob", "Scott",
            role = "aut",
            comment = c(ORCID = "0000-0003-2971-7673")))
@@ -25,11 +27,14 @@ Imports:
     dplyr (>= 1.0),
     rlang, 
     tidyr, 
-    igraph
+    igraph, 
+    dlookr
 Roxygen: list(markdown = TRUE)
+
 RoxygenNote: 7.2.1
 URL: https://sbarkerclarke-phd.github.io/CoOccurR/
 BugReports: https://github.com/sbarkerclarke-phd/CoOccurR/issues
+
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

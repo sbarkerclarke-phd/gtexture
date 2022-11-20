@@ -12,6 +12,9 @@
 #'   acceptable distance of one another or a single-element `character` vector
 #'   that describes how to identify acceptable neighbors/offsets
 #' @param normalize function that normalizes the co-occurrence matrix
+#' @param values named numeric with values corresponding to the nodes in x.
+#' @param verbose bool
+#' @param nlevels int number of levels to discretize into
 #' @param ... additional arguments
 #' @return co-occurrence matrix
 #' @export
@@ -50,7 +53,7 @@ get_comatrix.default <- function(x, ...) {
 # 4. normalize and return
 #' @rdname comat
 #' @export
-#' 
+#'
 get_comatrix.FitLandDF <- function(x,
                                    discrete = equal_discrete(2),             # currently a function from factory - need to export factory
                                    neighbor = manhattan(1),                  # currently a function from factory - need to export factory
@@ -82,16 +85,13 @@ get_comatrix.FitLandDF <- function(x,
 
 #'Method to get comatrix from igraph object + named values
 #
-#' @param values named numeric with values corresponding to the nodes in x.
-#' @param nlevels int specifying number of levels to discretize values into.
 #' @rdname comat
 #' @export
-#'
 #' @importFrom rlang .data
 #' @importFrom magrittr %>%
 #'
 get_comatrix.igraph <- function(x, values, nlevels=length(unique(values)),
-                                normalize = normalize_glcm){
+                                normalize = normalize_glcm, verbose = TRUE, ...){
 
 
   names_bool <- (!is.null(names(values)) & !is.null(names(igraph::V(x))))
@@ -102,7 +102,9 @@ get_comatrix.igraph <- function(x, values, nlevels=length(unique(values)),
            Either provide an equal number of nodes and node attributes in values or
            provide a graph with named vertices and named values")
     }
-    message("node values not provided for every node, removing nodes without provided attributes from graph")
+    if(verbose) {
+      message("node values not provided for every node, removing nodes without provided attributes from graph")
+    }
   }
 
 
@@ -122,8 +124,8 @@ get_comatrix.igraph <- function(x, values, nlevels=length(unique(values)),
   edge_df <- as.data.frame(edge_list)
 
   #join the discretised values onto each node
-  comat <- dplyr::left_join(edge_df, val_df1) %>%
-    dplyr::left_join(val_df2) %>%
+  comat <- dplyr::left_join(edge_df, val_df1, by = c("V1")) %>%
+    dplyr::left_join(val_df2, by = c("V2")) %>%
     dplyr::filter(!is.na(.data$val1), !is.na(.data$val2)) %>%
     dplyr::group_by(.data$val1, .data$val2) %>%
     dplyr::summarise(n = dplyr::n())
