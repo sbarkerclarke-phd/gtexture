@@ -2,7 +2,10 @@
 % Please edit documentation in R/discrete.R
 \name{kmeans_discrete}
 \alias{kmeans_discrete}
-\title{function to discretize using kmeans}
+
+\title{Kmeans clustering discretization
+Splitting of a vector of continuous values into k groups}
+
 \usage{
 kmeans_discrete(nlevels)
 }
@@ -13,5 +16,8 @@ kmeans_discrete(nlevels)
 function that makes a numeric vector discrete
 }
 \description{
-function to discretize using kmeans
+
+Kmeans clustering discretization
+Splitting of a vector of continuous values into k groups
+
 }

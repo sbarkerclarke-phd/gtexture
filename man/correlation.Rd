@@ -13,6 +13,7 @@ correlation(x, ...)
 
 \method{correlation}{matrix}(x, ...)
 
+
 \method{correlation}{FitLandDF}(x, nlevels, ...)
 }
 \arguments{
@@ -26,7 +27,9 @@ correlation(x, ...)
 correlation metric of \code{x}
 }
 \description{
-Calculate the autocorrelation feature or metric for a gray-level co-occurrence
+
+Calculate the correlation feature or metric for a gray-level co-occurrence
+
 matrix. For definition and application, see Lofstedt et al. (2019)
 \doi{10.1371/journal.pone.0212110}.
 }

@@ -44,6 +44,23 @@ mu_y <- function(mat) {
 }
 
 
+# Metric wrapper
+glcm_metrics.matrix <- function(glcm){
+  vec = c()
+  vec[1] = energy.matrix(glcm)
+  vec[2] = contrast.matrix(glcm)
+  vec[3] = inv_diff(glcm)
+  vec[4] = correlation.matrix(glcm)
+  vec[5] = entropy.matrix(glcm)
+  vec[6] = cluster_prom.matrix(glcm)
+  vec[7] = cluster_shade.matrix(glcm)
+  vec[8] = differenceEntropy.matrix(glcm)
+  vec[9] = sum_entropy.matrix(glcm)
+  vec[10] = autocorrelation.matrix(glcm)
+  vec[11] = dissimilarity.matrix(glcm)
+  return(vec)
+}
+
 
 #####CHECKS#####
 # returns true if `mat` is a valid GLCM; false otherwise
