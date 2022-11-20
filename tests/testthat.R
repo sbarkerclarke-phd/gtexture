@@ -1,4 +1,4 @@
 library(testthat)
-library(CoOccurR)
+library(gtexture)
 
-test_check("CoOccurR")
+test_check("gtexture")
