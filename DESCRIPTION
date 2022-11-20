@@ -1,5 +1,5 @@
 Package: gtexture
-Title: Generalized Application of Co-Occurrence Matrices
+Title: Generalized Application of Co-Occurrence Matrices and Haralick Texture 
 Version: 0.0.1
 Authors@R: c(
     person("Steph", "Barker-Clarke",
