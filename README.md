@@ -23,7 +23,7 @@ The gtexture R package can be installed as follows:
 # install.packages("gtexture")
 
 # install using the remotes package
-remotes::install_github("sbarkerclarke-phd/gtexture")
+remotes::install_github("rbarkerclarke/gtexture")
 ```
 
 ## Features
