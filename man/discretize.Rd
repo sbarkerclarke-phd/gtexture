@@ -3,6 +3,7 @@
 \name{discretize}
 \alias{discretize}
 \alias{discretize.numeric}
+\alias{discretize.list}
 \alias{discretize.integer}
 \alias{discretize.FitLandDF}
 \title{Discretize Numeric Variable Into Categories}
@@ -10,6 +11,8 @@
 discretize(x, ...)
 
 \method{discretize}{numeric}(x, nlevels, method = "equal", ...)
+
+\method{discretize}{list}(x, nlevels, ...)
 
 \method{discretize}{integer}(x, nlevels, ...)
 
