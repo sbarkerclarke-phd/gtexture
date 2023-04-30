@@ -54,6 +54,14 @@ discretize.numeric <- function(x, nlevels, method = "equal", ...) {
   disc_func(x)
 }
 
+# discretize list 
+#' @rdname discretize
+#' @export
+discretize.list <- function(x, nlevels, ...) {
+  discretize.numeric(x, nlevels, ...)
+}
+
+
 # discretize integer vectors
 #' @rdname discretize
 #' @export
