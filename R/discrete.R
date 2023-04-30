@@ -58,7 +58,7 @@ discretize.numeric <- function(x, nlevels, method = "equal", ...) {
 #' @rdname discretize
 #' @export
 discretize.list <- function(x, nlevels, ...) {
-  discretize.numeric(x, nlevels, ...)
+  discretize.numeric(unlist(x), nlevels, ...)
 }
 
 
