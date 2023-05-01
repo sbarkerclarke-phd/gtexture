@@ -25,10 +25,11 @@ Imports:
     fitscape (>= 0.1),
     magrittr (>= 2.0),
     dplyr (>= 1.0),
-    rlang, 
-    tidyr, 
-    igraph, 
-    dlookr
+    rlang,
+    tidyr,
+    igraph,
+    dlookr,
+    testthat
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 URL: https://sbarkerclarke-phd.github.io/CoOccurR/
