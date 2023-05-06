@@ -42,11 +42,11 @@ n_x <- normalize_glcm(x)
 contrast(n_x)
 
 # calculate contrast of fitness landscape, assuming 2 discrete gray levels
-contrast(my_landscape, nlevels = 2)
+contrast(n_x, nlevels = 2)
 
 ## confirm value of contrast for fitness landscape
 # extract normalized GLCM from fitness landscape
-my_glcm <- get_comatrix(my_landscape, discrete = equal_discrete(2))
+my_glcm <- get_comatrix(n_x, discrete = equal_discrete(2))
 
 # calculate contrast of extracted GLCM
 contrast(my_glcm)  # should match value of above contrast function call
