@@ -43,8 +43,8 @@ xminusy_k <- function(glcm, k){
     if( length(targetInMap > 0) ) sum <- sum + glcm[targetInMap, which(map == value)]
   }
 
-  #This ensure that values on both sides of the symmetrical matrix are accounted for
-  #if k = 0 it's onyl values along the main diagonal, and thus doesn't need doubling
+  #This ensures that values on both sides of the symmetrical matrix are accounted for
+  #if k = 0 it's only values along the main diagonal, and thus doesn't need doubling
   if(k == 0){ return(sum) }
   return(sum*2)
 }
@@ -158,7 +158,7 @@ glcm_variance <- function(glcm){
   return(sum)
 }
 
-#' @describeIn glcm_metrics Correlation
+#' @describeIn glcm_metrics correlation.matrix
 #' @export
 correlation.matrix <- function(glcm){
   sum <- 0
