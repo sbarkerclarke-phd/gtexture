@@ -1,7 +1,7 @@
 Package: gtexture
 Title: Generalized Application of Co-Occurrence Matrices and Haralick
     Texture
-Version: 0.0.1
+Version: 0.1.0
 Authors@R: c(
     person("Rowan", "Barker-Clarke", , "rowanbarkerclarke@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-1961-7919")),
