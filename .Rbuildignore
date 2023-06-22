@@ -4,3 +4,6 @@
 ^\.gitignore$
 ^README\.md$
 ^NEWS\.md$
+^revdep$
+^dev$
+^docs$

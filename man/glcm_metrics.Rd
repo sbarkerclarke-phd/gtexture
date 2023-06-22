@@ -3,72 +3,23 @@
 \name{glcm_metrics}
 \alias{glcm_metrics}
 \alias{xplusy_k}
-\alias{glcm_mean}
-\alias{glcm_mean.df}
-\alias{glcm_mean.matrix}
-\alias{mu_x.matrix}
-\alias{mu_y.matrix}
 \alias{glcm_variance}
-\alias{sum_avg.FitLandDF}
-\alias{sum_entropy.matrix}
-\alias{differenceEntropy.matrix}
-\alias{dissimilarity.matrix}
 \title{GLCM Metrics}
 \usage{
 xplusy_k(glcm, k)
 
-glcm_mean(glcm)
-
-glcm_mean.df(glcm)
-
-glcm_mean.matrix(glcm)
-
-mu_x.matrix(glcm)
-
-mu_y.matrix(glcm)
-
 glcm_variance(glcm)
-
-sum_avg.FitLandDF(x)
-
-sum_entropy.matrix(x)
-
-differenceEntropy.matrix(glcm, base = 2)
-
-dissimilarity.matrix(glcm)
 }
 \arguments{
 \item{glcm}{gray level co-occurrence matrix}
 
 \item{k}{summation equal to k}
-
-\item{x}{gray level co-occurrence matrix}
-
-\item{base}{Base of the logarithm in differenceEntropy.}
 }
 \description{
 GLCM Metrics
 }
 \section{Functions}{
 \itemize{
-\item \code{glcm_mean()}: Mean
-
-\item \code{glcm_mean.df()}: Mean.df
-
-\item \code{glcm_mean.matrix()}: Mean.matrix
-
-\item \code{mu_x.matrix()}: mu_x
-
-\item \code{mu_y.matrix()}: mu_y
-
 \item \code{glcm_variance()}: Variance
-
-\item \code{sum_avg.FitLandDF()}: Sum Average
-
-\item \code{sum_entropy.matrix()}: Sum Entropy
-
-\item \code{differenceEntropy.matrix()}: Difference Entropy
-
-\item \code{dissimilarity.matrix()}: Dissimilarity
 
 }}

@@ -1,39 +1,36 @@
 Package: gtexture
-Title: Generalized Application of Co-Occurrence Matrices and Haralick Texture 
+Title: Generalized Application of Co-Occurrence Matrices and Haralick
+    Texture
 Version: 0.0.1
 Authors@R: c(
-    person("Rowan", "Barker-Clarke",
-           email = "rowanbarkerclarke@gmail.com", role = c("aut", "cre"),
+    person("Rowan", "Barker-Clarke", , "rowanbarkerclarke@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-1961-7919")),
-    person("Raoul", "Wadhwa",
-           email = "raoulwadhwa@gmail.com", role = "aut",
+    person("Raoul", "Wadhwa", , "raoulwadhwa@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0003-0503-9580")),
-    person("Davis", "Weaver",
-            role = "aut"),
-    person("Jacob", "Scott",
-           role = "aut",
-           comment = c(ORCID = "0000-0003-2971-7673")))
-Description: Generalizes application of gray-level co-occurrence matrix (GLCM)
-    metrics to objects outside of images. The current focus is to apply GLCM
-    metrics to the study of fitness landscapes in evolutionary biology,
-    particularly the evolution of cancer resistance. A general reference to
-    learn more about mathematical oncology can be found in Rockne et al. (2019)
-    <doi:10.1088/1478-3975/ab1a09>.
+    person("Davis", "Weaver", role = "aut"),
+    person("Jacob", "Scott", role = "aut",
+           comment = c(ORCID = "0000-0003-2971-7673"))
+  )
+Description: Generalizes application of gray-level co-occurrence matrix
+    (GLCM) metrics to objects outside of images. The current focus is to
+    apply GLCM metrics to the study of fitness landscapes in evolutionary
+    biology, particularly the evolution of cancer resistance. A general
+    reference to learn more about mathematical oncology can be found in
+    Rockne et al. (2019) <doi:10.1088/1478-3975/ab1a09>.
 License: MIT + file LICENSE
-Encoding: UTF-8
+URL: https://rbarkerclarke.github.io/gtexture/
+BugReports: https://github.com/rbarkerclarke/gtexture/issues
 Imports: 
-    fitscape (>= 0.1),
-    magrittr (>= 2.0),
-    dplyr (>= 1.0),
-    rlang,
-    tidyr,
-    igraph,
     dlookr,
+    dplyr (>= 1.0),
+    fitscape (>= 0.1),
+    igraph,
+    magrittr (>= 2.0),
+    rlang,
+    tidyr
+Suggests: 
+    stats,
     testthat
+Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-URL: https://sbarkerclarke-phd.github.io/CoOccurR/
-BugReports: https://github.com/sbarkerclarke-phd/CoOccurR/issues
-Suggests: 
-    ggplot2,
-    OncoSimulR
