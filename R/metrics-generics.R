@@ -130,8 +130,8 @@ correlation.default <- function(x, ...) {
 # matrix correlation
 #' @rdname correlation
 #' @export
-
-correlation.matrix <- function(glcm, ...) {
+correlation.matrix <- function(x, ...) {
+  glcm <- normalize_glcm(x)
   sum <- 0
   mean <- glcm_mean(glcm)
   variance <- glcm_variance(glcm)

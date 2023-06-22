@@ -11,7 +11,7 @@ correlation(x, ...)
 
 \method{correlation}{default}(x, ...)
 
-\method{correlation}{matrix}(glcm, ...)
+\method{correlation}{matrix}(x, ...)
 
 \method{correlation}{FitLandDF}(x, nlevels, ...)
 }
