@@ -26,6 +26,10 @@ The gtexture R package can be installed as follows:
 remotes::install_github("rbarkerclarke/gtexture")
 ```
 
+## Data Availability 
+Data used for the Physics in Medicine and Biology paper () was sourced from the Cancer Cell Line Encyclopedia. 
+Mahmoud Ghandi, Franklin W. Huang, Judit Jané-Valbuena, Gregory V. Kryukov, ... Todd R. Golub, Levi A. Garraway & William R. Sellers. 2019. Next-generation characterization of the Cancer Cell Line Encyclopedia. Nature 569, 503–508 (2019).
+
 ## Features
 
 Coming soon...
