@@ -1,10 +1,10 @@
 # gtexture: R Package for the calculation of Haralick texture features for graphs and networks
 
-[![R-CMD-check](https://github.com/sbarkerclarke-phd/gtexture/workflows/R-CMD-check/badge.svg)](https://github.com/sbarkerclarke-phd/gtexture/actions)
+[![R-CMD-check](https://github.com/rbarkerclarke/gtexture/workflows/R-CMD-check/badge.svg)](https://github.com/rbarkerclarke/gtexture/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![CRAN version](http://www.r-pkg.org/badges/version/CoOccurR)](https://CRAN.R-project.org/package=CoOccurR)
-[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/CoOccurR)](https://CRAN.R-project.org/package=CoOccurR)
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fsbarkerclarke-phd%2FCoOccurR&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+[![CRAN version](http://www.r-pkg.org/badges/version/gtexture)](https://CRAN.R-project.org/package=gtexture)
+[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/gtexture)](https://CRAN.R-project.org/package=gtexture)
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Frbarkerclarke%2Fgtexture&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
 ## Overview
 
