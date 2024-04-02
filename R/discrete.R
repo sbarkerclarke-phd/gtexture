@@ -30,11 +30,6 @@ discretize <- function(x, ...) {
   UseMethod("discretize")
 }
 
-# error for default behavior at the moment
-discretize.default <- function(x, nlevels, ...) {
-  stop("default behavior not specified for discretize")
-}
-
 # discretize numeric vectors
 #' @rdname discretize
 #' @export
